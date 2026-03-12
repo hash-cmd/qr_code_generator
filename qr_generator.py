@@ -2,7 +2,7 @@ import qrcode
 from PIL import Image
 
 # Data to encode
-data = "https://icounselgh.tuceewellness.com/psychometric/generate"
+data = "https://institute.tucee.edu.gh/apply"
 
 # Create QR code instance
 qr = qrcode.QRCode(
@@ -33,4 +33,4 @@ pos = ((img.size[0] - logo_size) // 2, (img.size[1] - logo_size) // 2)
 img.paste(logo, pos, mask=logo if logo.mode=='RGBA' else None)
 
 # Save final QR code
-img.save("my_qrcode_with_logo.png")
+img.save("my_qrcode_without_logo.png")
