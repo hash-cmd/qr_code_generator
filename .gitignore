@@ -18,11 +18,13 @@ htmlcov/
 *.swp
 *.swo
 
-# Project specific: Generated QR codes
-# Keeping these ignored so they don't bloat the repo
+# Project specific: Generated QR codes and Logo assets
 *.png
+*.webp
 tict_voucher_qr.png
 my_qrcode.png
+qrcode_with_logo.png
+qrcode_plain.png
 
 # Scratch/Debug files
 scratch/
