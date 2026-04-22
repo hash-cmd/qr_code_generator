@@ -1,61 +1,62 @@
-# TICT Voucher QR Code Generator
+# 📱 QR Code Generator with Logo Embedding
 
-A Python-based utility to generate high-resolution QR codes for the TUCEE Institute of Counselling and Technology (TICT) voucher purchase system, featuring centered logo embedding.
+A high-performance Python utility for generating professional QR codes. This tool features a smart "island" background for centered logos, ensuring maximum visibility and scannability even with complex branding.
 
-## 🚀 Features
+## ✨ Features
 
-- **Branded QR Codes**: Automatically embeds the TICT logo in the center of the QR code.
-- **High Error Correction**: Uses `ERROR_CORRECT_H` (High) to ensure the QR remains scannable even with a logo covering part of the data.
-- **White "Island" Protection**: Adds a clean white background behind the logo for maximum visibility and better scanning.
-- **High Resolution**: Configurable `box_size` for crisp, print-ready images.
+- **Optional Logo Embedding**: Smoothly generates plain QR codes if no logo is found, or beautifully embeds a logo if provided.
+- **"White Island" Protection**: Automatically draws a clean white background behind the logo to prevent QR modules from interfering with your branding.
+- **Smart Detection**: Automatically searches for `logo.png` in the root directory or falls back to an existing asset in the `images/` folder.
+- **High Error Correction**: Uses `ERROR_CORRECT_H` (High) as the default, allowing up to 30% of the code to be obscured while remaining fully functional.
+- **Premium Resolution**: Configurable `box_size` (default is 20) for crisp, professional images suitable for print and digital use.
 
 ## 📋 Prerequisites
 
-- Python 3.x
-- [Pillow](https://python-pillow.org/) (Image processing)
-- [qrcode](https://pypi.org/project/qrcode/) (QR generation)
+- **Python 3.x**
+- **Libraries**:
+    - [qrcode[pil]](https://pypi.org/project/qrcode/) - For core generation.
+    - [Pillow](https://python-pillow.org/) - For advanced image processing.
 
 ## 🛠️ Installation
 
-1. **Create and activate a virtual environment:**
+1. **Activate your environment**:
    ```bash
    python3 -m venv venv
    source venv/bin/activate
    ```
 
-2. **Install dependencies:**
+2. **Install requirements**:
    ```bash
    pip install qrcode[pil]
    ```
 
 ## 📂 Project Structure
 
-- `qr_generator.py`: The main script with logo embedding and optimized styling.
-- `qr_generator_without_logo.py`: A simplified version without branding.
-- `images/`: Directory containing the TICT logo (`tict.webp`).
-- `tict_voucher_qr.png`: The generated branded QR code.
-- `my_qrcode.png`: A copy of the generated QR code.
+- `qr_generator.py`: The single main script containing all generation logic.
+- `images/`: Directory for default or fallback logo assets.
+- `qrcode_with_logo.png`: Output generated when a logo is detected.
+- `qrcode_plain.png`: Output generated when running without a logo.
 
 ## 🖥️ Usage
 
-Simply run the main generator script:
+Simply run the main script:
 
 ```bash
 python3 qr_generator.py
 ```
 
-The script will generate the QR code and save it to the project root. It handles:
-- Correcting the URL for voucher purchases.
-- Loading the logo from the local `images/` folder.
-- Resizing and centering the logo perfectly.
+### How to use a Custom Logo:
+Place your logo image in the project root and name it **`logo.png`**. The script will automatically detect it, resize it, and center it with the protective white background.
+
+If no logo is found, the script will gracefully generate a plain QR code named `qrcode_plain.png`.
 
 ## 📝 Configuration
 
-You can customize the following variables inside `qr_generator.py`:
+Open `qr_generator.py` to easily customize:
 
-- `data`: The URL or text to encode.
-- `box_size`: Controls the resolution of the QR code (default is 20).
-- `logo_size`: Adjusts the size of the center logo.
+- `data`: The URL, text, or data you want to encode.
+- `box_size`: The resolution of the QR (higher = larger file).
+- `logo_size`: The relative size of the center logo.
 
 ---
-*Created for TUCEE Institute of Counselling and Technology.*
+*Maintained for Public and Professional Use.*
