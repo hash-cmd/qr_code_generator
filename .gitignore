@@ -2,6 +2,33 @@
 venv/
 env/
 .venv/
+ENV/
 
-#image created
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Editor/IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Project specific: Generated QR codes
+# Keeping these ignored so they don't bloat the repo
 *.png
+tict_voucher_qr.png
+my_qrcode.png
+
+# Scratch/Debug files
+scratch/
+debug_logo.py
+analyze_image.py
+
+# System files
+.DS_Store
+Thumbs.db

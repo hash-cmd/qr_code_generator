@@ -2,35 +2,48 @@ import qrcode
 from PIL import Image
 
 # Data to encode
-data = "https://institute.tucee.edu.gh/apply"
+data = "https://apply.tucee.edu.gh/voucher/purchase"
 
-# Create QR code instance
 qr = qrcode.QRCode(
     version=1,  # size of QR Code (1-40)
-    error_correction=qrcode.constants.ERROR_CORRECT_H,  # high error correction
-    box_size=10,
-    border=4,
+    error_correction=qrcode.constants.ERROR_CORRECT_H, 
+    box_size=20,  # Increased resolution
+    border=2,   # Smaller border
 )
 
-# Add data
 qr.add_data(data)
 qr.make(fit=True)
 
-# Generate QR code image
+# Ensure image is in RGB for saving as PNG/WebP
 img = qr.make_image(fill_color="black", back_color="white").convert('RGB')
 
-# Open your logo image
-logo = Image.open("logo.png")  # Replace with your logo file path
+# Load and prepare logo
+logo = Image.open("images/tict.webp")
+logo = logo.convert("RGBA")  # Ensure we have alpha channel for masking
 
-# Resize logo (optional: adjust depending on QR size)
-logo_size = 60
-logo = logo.resize((logo_size, logo_size))
+# Calculate logo size (aim for ~22% of QR code size)
+qr_width, qr_height = img.size
+logo_size = qr_width // 4  # Roughly 112px for a 450px QR
+logo = logo.resize((logo_size, logo_size), Image.Resampling.LANCZOS)
 
-# Calculate positioning for logo at center
-pos = ((img.size[0] - logo_size) // 2, (img.size[1] - logo_size) // 2)
+# Calculate positioning
+pos = ((qr_width - logo_size) // 2, (qr_height - logo_size) // 2)
 
-# Paste logo onto QR code
-img.paste(logo, pos, mask=logo if logo.mode=='RGBA' else None)
+# Create a white "island" for the logo so it stands out
+white_background = Image.new("RGBA", (logo_size, logo_size), "white")
+img.paste(white_background, pos)
+
+# Paste logo onto the white island
+img.paste(logo, pos, mask=logo)
+
+import os
 
 # Save final QR code
-img.save("my_qrcode_without_logo.png")
+output_file = "tict_voucher_qr.png"
+img.save(output_file)
+
+# Also save as my_qrcode.png in case the user is looking for that
+img.save("my_qrcode.png")
+
+print(f"✅ Success! QR code saved to: {os.path.abspath(output_file)}")
+print(f"✅ Also saved a copy to: {os.path.abspath('my_qrcode.png')}")
